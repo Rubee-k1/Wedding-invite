@@ -1,9 +1,9 @@
-# The invite is a plain static page: publish the repository root as-is.
-# Without this, Netlify sees package.json (left over from AI Studio) and runs
-# `vite build`, publishing a dist/ folder that doesn't contain the photos.
+# The invite is a plain static page. Netlify saw package.json (left over from
+# AI Studio) and ran `vite build`, which rewrote image paths and dropped most
+# photos. Instead, copy the page and its photos into dist/ unchanged.
 [build]
-  publish = "."
-  command = "echo 'Static site: no build step'"
+  command = "node scripts/copy-static.mjs"
+  publish = "dist"
 
 [[headers]]
   for = "/index.html"
