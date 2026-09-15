@@ -1,0 +1,11 @@
+# The invite is a plain static page: publish the repository root as-is.
+# Without this, Netlify sees package.json (left over from AI Studio) and runs
+# `vite build`, publishing a dist/ folder that doesn't contain the photos.
+[build]
+  publish = "."
+  command = "echo 'Static site: no build step'"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
